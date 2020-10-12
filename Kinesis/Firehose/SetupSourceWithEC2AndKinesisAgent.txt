@@ -1,0 +1,52 @@
+
+######################
+Setup an EC2 Instance with Kinesis Agent as Source 
+#####################
+1. Create new EC2 Instance of Type Amazon Linux AMI
+2. Create KeyPair "BigData.pem" and download it
+3. Finally Launch the new Instance
+4. We will connect to the EC2 Instance with PUTTY, so download PUTTY
+5. Open PuttyGen to convert the .pem file to a .ppk file
+6. Hit LOAD ad select the .pem file
+7. SAVE Private Key as BigData.ppk file
+
+8. Open the PUTTY App
+9. For the EC2 Instance copy the Host name (select the instance, click on "Connect" and then on "SSH Client")
+10. HostName is sth like ec2-XX-XXX-XXX-X.eu-central-1.compute.amazonaws.com
+11. Paste the Host Name into PUTTY field "Host Name for IP Address"
+12. Go to SSH submenu, then to Auth submenu and Browse the .ppk file
+13. Save this as a Session with Name BigData
+14. Hit "Open" and a console opens
+
+##################
+Install the Kinesis Agent, download the Python Script, the Log entries,  and edit settings for Firehose in agent.json
+###################
+15. Login as "ec2-user"
+16. Install the Kinesis Agent: sudo yum install -y aws-kinesis-agent
+17. Download the Sample Log Files and the Python Script: wget http://media.sundog-soft.com/AWSBigData/LogGenerator.zip
+18. Unzip:  unzip LogGenerator.zip
+19. Change the Permissions to run the Python script: chmod a+x LogGenerator.py
+20. Have a look at the script: less LogGenerator.py
+--> How many lines you want to read from the OnlineRetail.csv file and basically creates a bunch of CSV files inside the var/log cadabra directory for you.
+21. Create Log Directory : sudo mkdir /var/log/cadabra
+22. go to the kinesis agent configuration file: cd /etc/aws-kinesis/
+23. Edit the file: sudo nano agent.json
+24.  SET The firehose endpoint: "firehose.endpoint": "firehose.eu-central-1.amazonaws.com",
+25. Permit the Agent to access EC2 instance: Create Role with Policy " AdminAccess" and attach to the EC2 Instance (No Secrete keys necessary)
+26. Rename in agent.json: filePattern: "/var/log/cadabra/*log" , deliveryStream: "PurchaseLogs"
+27. Hit Ctrl O to write that out and Ctrl X to exit
+
+####################
+Start the Kinesis Agent, the Python Script and Monitor what has been written to Firehose
+###############
+28. Start the Kinesis Agent: sudo service aws-kinesis-agent start
+29. Make sure that the agent is started automatically when we start the EC2 instance here: sudo chkconfig aws-kinesis-agent on
+30. Go back to home directory : cd ~
+31. Start the Python Script: sudo ./LogGenerator.py 50000 (Generate 50000 log entries)
+32. Check that the log entries have been written to the cadabra folder into file *log:
+    - cd /var/log/cadabra/  -> ls : see the log data have been written by the script
+33. Now check what the Agent has already sent to firehose:  - tail -f /var/log/aws-kinesis-agent/aws-kinesis-agent.log 
+#################
+Check the Destination S3 Bucket
+################
+34. Go to S3 and you see that the data has been  split into 5MB chunks as specified

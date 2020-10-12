@@ -1,0 +1,54 @@
+
+######################
+Setup an Delivery Stream with Firehose with Kinesis Agent as Source and S3 as Destination
+#####################
+1. Log into AWS Console, go to Kinesis
+2. Create Delivery Stream named "PurchaseLogs"
+3. Use Kinesis Agent as  a "Direct Put Source" (alternatively choose Kinesis SDK (PutRecord or PuRecordBatch), IoT, Cloud Watch Logs or Cloud Watch Events)
+4. Ditch the option to either Process the Data by Lambda or Convert the Data by AWS Glue, since the source is already structured csv files.
+5. Define the Destination: S3 bucket "my-rusken-orderlogs
+6. Define Buffer size with 5 MB and Buffer Interval to 60 seconds (minimum value)
+7. Ditch S3 Compression and S3 Encryption
+8. Define an IAM Role for Firehose to access the S3 bucket (also includes policies for Lambda, Glue and Kinesis)
+9. Finally create the Delivery Stream
+#####################################
+
+
+
+
+
+Create new EC2 INstance
+
+Create Role with Policy " AdminAccess" and attach to the EC2 Instance
+
+
+Donload Putty 
+-> Make ppk file from pem file with putty-gen App
+
+
+Switch to Putty
+
+dos window login : ec2-user
+
+sudo yum install -y aws-kinesis-agent
+wget http://media.sundog-soft.com/AWSBigData/LogGenerator.zip
+unzip LogGenerator.zip
+chmod a+x LogGenerator.py
+sudo mkdir /var/log/cadabra
+cd /etc/aws-kinesis/
+sudo nano agent.json
+ "firehose.endpoint": "firehose.eu-central-1.amazonaws.com",
+
+######
+CTRL O ->Enter -> CTRL X
+
+
+sudo service aws-kinesis-agent start
+(to let the kinesis agent start automatically with ec2 start):
+sudo chkconfig aws-kinesis-agent on
+(go back to home directory to start the script LogGenerator.py):
+cd ~
+(Execute the python script to showel log files to Firhose and then to S3)
+sudo ./LogGenerator.py 500
+cd /var/log/cadabra/
+tail -f /var/log/aws-kinesis-agent/aws-kinesis-agent.log
