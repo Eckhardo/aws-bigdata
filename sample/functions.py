@@ -4,7 +4,6 @@ def sayHello (name= 'Nobody'):
 sayHello()
 sayHello('Eberhard')
 
-
 def sayGoodMorning(first, last):
 
     """ Say Good Morning """

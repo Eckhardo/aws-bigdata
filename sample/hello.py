@@ -15,7 +15,6 @@ print('I love Python ' + str(version))
 print('Ebi {}s {}.' .format('love','Python'))
 print('I {0} {1}. {1} {0}s me.' .format('love','Python'))
 
-
 first = 'I'
 second= 'love'
 third = 'Perchpike Fishing'
