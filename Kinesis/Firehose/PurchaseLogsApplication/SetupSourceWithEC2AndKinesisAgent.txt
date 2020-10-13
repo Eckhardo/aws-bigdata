@@ -34,7 +34,7 @@ Install the Kinesis Agent, download the Python Script, the Log entries,  and edi
 24.  SET The firehose endpoint: "firehose.endpoint": "firehose.eu-central-1.amazonaws.com",
 25. Permit the Agent to access EC2 instance: Create Role with Policy " AdminAccess" and attach to the EC2 Instance (No Secrete keys necessary)
 26. Rename in agent.json: filePattern: "/var/log/cadabra/*log" , deliveryStream: "PurchaseLogs"
-27. Hit Ctrl O to write that out and Ctrl X to exit
+27. Hit Ctrl O to write that out, ENTER, and Ctrl X to exit
 
 ####################
 Start the Kinesis Agent, the Python Script and Monitor what has been written to Firehose
@@ -45,7 +45,7 @@ Start the Kinesis Agent, the Python Script and Monitor what has been written to 
 31. Start the Python Script: sudo ./LogGenerator.py 50000 (Generate 50000 log entries)
 32. Check that the log entries have been written to the cadabra folder into file *log:
     - cd /var/log/cadabra/  -> ls : see the log data have been written by the script
-33. Now check what the Agent has already sent to firehose:  - tail -f /var/log/aws-kinesis-agent/aws-kinesis-agent.log 
+33. Now check what the Agent has already sent to firehose: cd ~ ->   tail -f /var/log/aws-kinesis-agent/aws-kinesis-agent.log 
 #################
 Check the Destination S3 Bucket
 ################
