@@ -1,0 +1,8 @@
+#######################
+Replace the Python Script "Consumer.py" running on a single EC2 instance 
+with a Lambda function (for scaling reasons)
+#######################
+
+1.) Create an IAM Role with 2 Policies: One to read from Kinesis, the other to write to DynamoDB
+AmazonKinesisReadOnly, AmazonDynamoDBFullAccess
+2.)

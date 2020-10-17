@@ -1,4 +1,4 @@
 1.)  A PythonScript "LogGenerator.py" reads data from OnlineRetail.txt and writes it to a log file
 2.)  The Kinesis Agent is configured to read from this log file, converts the csv to JSON and writes the records into the Kinesis Data Stream
-3.)  A Python Script "Consumer.py" reads from the Kinesis Stream and iteratively converts the records into an DynamoDB-compatible format
+3.)  A Python Script "Consumer.py" running on a single EC2 instance reads from the Kinesis Stream and iteratively converts the records into an DynamoDB-compatible format
      and writes theses records with a PutItem into DynamoDB.
