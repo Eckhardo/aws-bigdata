@@ -1,0 +1,25 @@
+#####################################
+
+Create a DynamoDB Table, setup a Python SDK and provide a Python script that reads from
+the Kinesis Data Stream and put the records into the DynamoDB Table)
+###########################################################
+
+
+### Create a DynamoDB Table "RuskenOrders" with default settings (5 WCU, 5 RCU)
+1.)  Partition Key: CustomerID, Sort Key: OrderID
+
+### Setup Python SDK and the Python script
+2.) Login into EC2 Instance with PUTTY
+3.) Install the Python SDK: sudo pip install boto3
+4.) Provide the Access Keys and the region in a separate folder:
+  -  mkdir .aws
+  -  cd .aws/
+  - nano credentials: Copy from C:\Users\eckha\.aws\credentials
+  - ctrl O, Enter, ctrl X  
+  - nano config:  Copy from C:\Users\eckha\.aws\config
+  - ctrl O, Enter, ctrl X  
+  - back to home directory: cd .. (Check with: pwd command)
+5.) Download the Python Script (that will read the Kinesis Data Stream and put the records into DynamoDB
+wget http://media.sundog-soft.com/AWSBigData/Consumer.py
+6.) Use the correct names for the Kinesis Data Stream ("RuskenOrders") and the DynamoDB Table ("RuskenOrders")
+
