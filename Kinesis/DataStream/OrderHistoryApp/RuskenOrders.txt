@@ -23,5 +23,5 @@ Create a Kinesis Stream with 1 Shard called RuskenOrders
 7. Start the Python Script: sudo ./LogGenerator.py 50000 (Generate 50000 log entries)
 8. Check that the log entries have been written to the cadabra folder into file *log:
     - cd /var/log/cadabra/  -> ls : see the log data have been written by the script
-9. Now check what the Agent has already sent to firehose: cd ~ ->   tail -f /var/log/aws-kinesis-agent/aws-kinesis-agent.log 
+9. Now check what the Agent has already sent to kinesis: cd ~ ->   tail -f /var/log/aws-kinesis-agent/aws-kinesis-agent.log 
 10: Check Kinesis Streams Cloud Watch Metrics (PutRecords) to verify the success.
