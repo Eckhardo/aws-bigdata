@@ -25,7 +25,7 @@ the Kinesis Data Stream (converted by the agent from CSV to JSON before triggeri
 7.) chmod a+x Consumer.py
 8.) sudo service aws-kinesis-agent restart
 
-9.) Run Script: ./Consumer.py
+9.) Run Script: sudo ./Consumer.py
 
 HINTS: The restart of the kinesis agent might be necessary.
 
