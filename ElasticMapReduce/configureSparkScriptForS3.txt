@@ -1,0 +1,15 @@
+######################################
+Modify the spark script to fetch the sample data from s3 and 
+do the calculations on these sample data
+######################################
+
+1.) Go to the S3 Bucket "my-rusken-orderlogs/2020/10/19/16" and make the partition for your PurchageLogs "public"
+thus spark can access the data
+2.) Go to Course Materials, folder ProdcutRecommendations and Open the file als_modifications.txt
+3.) Copy and Paste into als_example.py
+- delete lines by Ctrl K
+- paste modification in
+- exchange userid and movieId with customerid and itemid
+4.) Ctrl O, enter, Ctrl X
+5.)  Run Script: spark-submit   als_example.py
+6.) Terminate Cluster

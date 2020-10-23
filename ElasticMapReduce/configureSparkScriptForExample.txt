@@ -1,0 +1,21 @@
+########################
+Spark comes with a whole bunch of sample scripts for differnet tasks:
+Here a sample script is used with a Machine Learning feature for
+Recommendations: Alternate Least Square (ALS)
+####################################
+
+
+1.) .... Logged in EMR Master Node EC2 Instance
+2.) copy the sample script in to home directory
+- cp /usr/lib/spark/examples/src/main/python/ml/als_example.py ./
+
+Copy the sample data into the hadoop file system:
+3a.) Make a dir in the hadoop HDFS file system:
+- hadoop fs -mkdir -p /user/hadoop/data/mllib/als
+3b.) Copy the sample data into the new dir:
+- hadoop fs -copyFromLocal /usr/lib/spark/data/mllib/als/sample_movielens_ratings.txt /user/hadoop/data/mllib/als/sample_movielens_ratings.txt
+4.) set log level in script
+-  sudo nano als_example.py
+-  add new line : spark.sparkContext.setLogLevel("ERROR")
+- Crtl O, Enter, Ctrl X
+5. ) Run Script: spark-submit   als_example.py

@@ -1,10 +1,23 @@
 ###################################
-Setup an EMR Cluster with Spark as execution engine
+Setup an EMR Cluster with Spark as execution engine 
+and connect va Putty to the EMR Master Node
 ###################################
 
 1.) AWS Console: Create Cluster of Type "Spark" (alternatively: Hadoop, Hive or Presto)
+1b.) Specify the Source in S3: RuskenOrders
 2.) Specify  Number  of Nodes : 1 Master Node, 2 Core Nodes
 3.) Specify Type of EC2 Instances: m5
 4.) Specify the existing BigData key pair as EC2-KeyPair
 5.) Specify Permissions: EMR-Default_Role and EMR_EC2_Default_Role
 6.) Finally Create Cluster
+
+7.) Add an Entry to the Master Security Group for SSH:Set Port 22 as new Inbound Rule
+8.) Copy the DNS of the Master Node (for PUTTYsage): Summary Tab-> Click SSH on Filed Master Public DNS
+9.) Log In via PUTTY into the Apache Spark Master Node:
+     - Open the PUTTY App
+     - For the EC2 Instance copy the Host name (select the instance, click on "Connect" and then on "SSH Client")
+     - HostName is sth like ec2-XX-XXX-XXX-X.eu-central-1.compute.amazonaws.com
+     - Paste the Host Name into PUTTY field "Host Name for IP Address"
+     - Go to SSH submenu, then to Auth submenu and Browse the .ppk file
+     - Save this as a Session with Name BigData
+     - Hit "Open" and a console opens for the EMR Master Node
