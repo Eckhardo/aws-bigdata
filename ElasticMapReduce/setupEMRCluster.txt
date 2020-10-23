@@ -7,4 +7,4 @@ Setup an EMR Cluster with Spark as execution engine
 3.) Specify Type of EC2 Instances: m5
 4.) Specify the existing BigData key pair as EC2-KeyPair
 5.) Specify Permissions: EMR-Default_Role and EMR_EC2_Default_Role
-6.) Create Cluster
+6.) Finally Create Cluster
