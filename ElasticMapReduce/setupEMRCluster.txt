@@ -1,0 +1,10 @@
+###################################
+Setup an EMR Cluster with Spark as execution engine
+###################################
+
+1.) AWS Console: Create Cluster of Type "Spark" (alternatively: Hadoop, Hive or Presto)
+2.) Specify  Number  of Nodes : 1 Master Node, 2 Core Nodes
+3.) Specify Type of EC2 Instances: m5
+4.) Specify the existing BigData key pair as EC2-KeyPair
+5.) Specify Permissions: EMR-Default_Role and EMR_EC2_Default_Role
+6.) Create Cluster
